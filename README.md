@@ -1,61 +1,140 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## Restaurant REST API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Описание
+Backend (REST API) часть сервиса для автоматизации работы ресторана. Сервис предоставляет функционал управления пользователями, категориями меню, блюдами и заказами.
 
-## About Laravel
+## Реализованные возможности
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Пользователи
+- Создание, редактирование, удаление (**Доступно только Super Admin**);
+- Авторизация по email и паролю или пин-коду (**официанты только по пин-коду**);
+- Сброс и восстановление пароля.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Категории меню
+- Создание, редактирование, удаление;
+- Прикрепление изображений.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Блюда
+- Создание, редактирование, удаление;
+- Привязка к категории меню;
+- Прикрепление изображений.
 
-## Learning Laravel
+### Заказы
+- Создание, добавление блюд, удаление;
+- Закрытие заказа;
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Безопасность
+- Реализована аутентификация с помощью Laravel Sanctum;
+- Реализовано разделение прав пользователей по ролям;
+- Реализовано проверка прав на редактирование, удаление и закрытие заказа официантами;
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Роли пользователей
+- Super Admin - управление пользователями, доступ ко всем функциям сервиса;
+- Администратор - управление категориями блюд и блюдами, просмотр заказов и ежедневной отчетности;
+- Официант - управление заказами.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Технологический стек
+- **PHP 8.2;**
+- **Laravel 12.26.2;**
+- **PostgreSQL 16.9;**
+- **Nginx 1.29.1;**
+- **Docker**
+- **L5Swagger**
 
-## Laravel Sponsors
+## Установка и запуск
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+1. Клонировать репозиторий
+```shell
+git clone https://github.com/pashidze/Restaurant-API.git
+```
 
-### Premium Partners
+2. Установить зависимости
+```shell
+composer install
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+3. Скопировать и настроить .env
+```shell
+cp .env.example .env 
+```
 
-## Contributing
+4. Запустить Docker контейнеры
+```shell
+docker compose build
+docker compose up -d
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+5. Сгенерировать ключ приложения
+```shell
+docker compose exec backend php artisan key:generate
+```
 
-## Code of Conduct
+6. Запустить миграции и загрузку начальных данных
+```shell
+docker compose exec backend php artisan migrate --seed
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+7. Проверить доступность сервиса
+```shell
+http://localhost:8000/
+```
+### Дополнительно
 
-## Security Vulnerabilities
+1. Автогенерируема документация доступна по ссылке
+```shell
+http://localhost:8000/api/documentation#/
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+2. Отчет за день формируется командой
+```shell
+docker compose exec backend php artisan app:day-report
+```
 
-## License
+3. Postman коллекция доступна по ссылке
+```shell
+https://pashidze-5779906.postman.co/workspace/My-Workspace~221f449a-d581-47f1-9a8e-5dd2a5a7330a/collection/47093217-5c922a6e-d94f-4cd0-a666-2955fe370aa3?action=share&source=copy-link&creator=47093217
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Возможные доработки
+- Добавление подтверждения учетной записи;
+- Создание feature тестов;
+- Создание unit-теста artisan команд;
+- Автоматизация формирования ежедневной отчетности.
+
+## Основные эндпоинты
+
+### Auth (Аутентификация и авторизация)
+- ```POST /api/login``` - вход;
+- ```POST /api/logout``` - выход;
+- ```POST /api/logout_all``` - выход со всех устройств;
+- ```POST /api/forgot-password``` - сброс пароля с отправкой ссылки для восстановления;
+- ```POST /api/reset-password``` - восстановление пароля;
+
+### User (Пользователь)
+- ```GET /api/user``` - список;
+- ```POST /api/user``` - добавление;
+- ```GET /api/user/{id}``` - вывод одного;
+- ```PATCH /api/user/{id}``` - редактировать;
+- ```DELETE /api/user/{id}``` - удалить;
+
+### Menu category (Категория меню)
+- ```GET /api/menu_category``` - список;
+- ```POST /api/menu_category``` - добавление;
+- ```GET /api/menu_category/{id}``` - вывод одного;
+- ```PATCH /api/menu_category/{id}``` - редактировать;
+- ```DELETE /api/menu_category/{id}``` - удалить;
+
+### Dish (Блюдо)
+- ```GET /api/dish``` - список;
+- ```POST /api/dish``` - добавление;
+- ```GET /api/dish/{id}``` - вывод одного;
+- ```PATCH /api/dish/{id}``` - редактировать;
+- ```DELETE /api/dish/{id}``` - удалить;
+
+### Dish (Блюдо)
+- ```GET /api/order``` - список;
+- ```POST /api/order``` - добавление;
+- ```GET /api/order/{id}``` - вывод одного;
+- ```PATCH /api/order/{id}``` - редактировать;
+- ```PATCH /api/order/{id}/close``` - закрыть;
+- ```DELETE /api/order/{id}``` - удалить;
