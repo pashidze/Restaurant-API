@@ -131,7 +131,7 @@ https://pashidze-5779906.postman.co/workspace/My-Workspace~221f449a-d581-47f1-9a
 - ```PATCH /api/dish/{id}``` - редактировать;
 - ```DELETE /api/dish/{id}``` - удалить;
 
-### Dish (Блюдо)
+### Order (Заказ)
 - ```GET /api/order``` - список;
 - ```POST /api/order``` - добавление;
 - ```GET /api/order/{id}``` - вывод одного;
