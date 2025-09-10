@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->softDeletes();
             $table->timestamps();
         });
 
@@ -26,6 +27,7 @@ return new class extends Migration
             $table->string('pin_code')->unique();
             $table->unsignedInteger('role_id');
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
             $table->index('role_id', 'user_role_idx');
             $table->foreign('role_id', 'user_role_fk')->references('id')->on('roles')->onDelete('cascade')->onUpdate('cascade');

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('composition')->nullable();
             $table->float('calories')->default(0);
             $table->float('price')->default(0);
+            $table->softDeletes();
             $table->unsignedBigInteger('category_id');
             $table->timestamps();
 
