@@ -20,7 +20,7 @@ class DishResource extends JsonResource
             'image' => $this->image,
             'composition' => $this->composition,
             'calories' => $this->calories,
-            'price' => $this->price,
+            'price' => (float)$this->price,
             'category_id' => $this->category_id,
         ];
     }

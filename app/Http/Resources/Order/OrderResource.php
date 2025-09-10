@@ -21,7 +21,7 @@ class OrderResource extends JsonResource
             'number' => $this->number,
             'list_of_dishes' => DishOrderResource::collection($this->whenLoaded('dishes')),
             'number_of_items' => $this->number_of_items,
-            'cost' => $this->cost,
+            'cost' => (float)$this->cost,
             'date_of_creation' => $this->date_of_creation,
             'closing_date' => $this->closing_date,
             'waiter' => new WaiterResource($this->whenLoaded('user')),

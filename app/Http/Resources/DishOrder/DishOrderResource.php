@@ -17,9 +17,9 @@ class DishOrderResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'price' => $this->price,
+            'price' => (float)$this->price,
             'quantity' => $this->pivot->quantity,
-            'cost' => $this->price * $this->pivot->quantity,
+            'cost' => (float)$this->price * $this->pivot->quantity,
         ];
     }
 }
