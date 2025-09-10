@@ -25,7 +25,7 @@ class FilterUserRequest extends FormRequest
             'name' => 'nullable|string|max:255|',
             'email' => 'nullable|string|max:255',
             'role' => 'nullable|string|max:255',
-            'sort_by' => 'nullable|string',
+            'sort_by' => 'nullable|string|in:id,name,role_id',
             'sort_dir' => 'nullable|string|in:asc,desc',
             'page' => 'nullable|integer',
             'per_page' => 'nullable|integer',

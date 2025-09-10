@@ -22,10 +22,8 @@ class UpdateOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'list_of_dishes' => 'required|array',
-            'date_of_creation' => ['nullable|date', 'date_format:Y-m-d H:i:s'],
-            'closing_date' => ['nullable|date', 'date_format:Y-m-d H:i:s'],
-            'user_id' => 'nullable|integer|exists:users,id',
+            'list_of_dishes.*.dish_id' => 'sometimes|required|exists:dishes,id',
+            'list_of_dishes.*.quantity' => 'sometimes|required|numeric|min:1',
         ];
     }
 }

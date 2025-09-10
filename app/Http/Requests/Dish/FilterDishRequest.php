@@ -27,7 +27,7 @@ class FilterDishRequest extends FormRequest
             'calories' => 'nullable|numeric|min:0',
             'price' => 'nullable|numeric|min:0',
             'category_id' => 'nullable|exists:menu_categories,id',
-            'sort_by' => 'nullable|string',
+            'sort_by' => 'nullable|string|in:id,name,calories,price',
             'sort_dir' => 'nullable|string|in:asc,desc',
             'page' => 'nullable|integer',
             'per_page' => 'nullable|integer',

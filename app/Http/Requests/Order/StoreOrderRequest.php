@@ -22,12 +22,8 @@ class StoreOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'list_of_dishes' => 'required|array',
-            'number_of_items' => 'nullable|integer',
-            'cost' => 'nullable|numeric',
-            'date_of_creation' => ['nullable|date', 'date_format:Y-m-d H:i:s'],
-            'closing_date' => ['nullable|date', 'date_format:Y-m-d H:i:s'],
-            'user_id' => 'required|integer|exists:users,id',
+            //'list_of_dishes.*.dish_id' => 'required|exists:dishes,id',
+            //'list_of_dishes.*.quantity' => 'required|numeric|min:1',
         ];
     }
 }

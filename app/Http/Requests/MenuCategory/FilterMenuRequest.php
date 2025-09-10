@@ -23,7 +23,7 @@ class FilterMenuRequest extends FormRequest
     {
         return [
             'name' => 'nullable|string|max:255',
-            'sort_by' => 'nullable|string',
+            'sort_by' => 'nullable|string|in:id,name',
             'sort_dir' => 'nullable|string|in:asc,desc',
             'page' => 'nullable|integer',
             'per_page' => 'nullable|integer',
