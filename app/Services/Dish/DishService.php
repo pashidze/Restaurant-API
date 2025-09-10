@@ -15,8 +15,11 @@ class DishService
             DB::beginTransaction();
 
             //Сохранение картинки в хранилище и добавление записи в БД
-            $imagePatch = Storage::put('/Images/Dishes', $data['image']);
-            $data['image'] = $imagePatch;
+            if(isset($data['image']))
+            {
+                $imagePatch = Storage::disk('public')->put('/Images/Dishes', $data['image']);
+                $data['image'] = $imagePatch;
+            }
             $dish = Dish::create($data);
 
             DB::commit();
@@ -42,11 +45,10 @@ class DishService
             DB::beginTransaction();
 
             $oldImg = $dish->image;
-            $newImg = $data['image'] ?? null;
 
             //Если меняется картинка, то нужно внести её в хранилище и удалить оттуда старую
-            if(isset($newImg)) {
-                $newImg = Storage::put('/Images/Dishes', $data['image']);
+            if(isset($data['image'])) {
+                $newImg = Storage::disk('public')->put('/Images/Dishes', $data['image']);
                 $data['image'] = $newImg;
                 $dish->update($data);
                 Storage::delete($oldImg);

@@ -15,8 +15,11 @@ class MenuService
             DB::beginTransaction();
 
             //Сохранение картинки в хранилище и добавление записи в БД
-            $image = Storage::put('/Images/MenuCategory', $data['image']);
-            $data['image'] = $image;
+            if(isset($data['image']))
+            {
+                $image = Storage::disk('public')->put('app/public/Images/MenuCategory', $data['image']);
+                $data['image'] = $image;
+            }
             $category = MenuCategory::create($data);
 
             DB::commit();
@@ -41,12 +44,11 @@ class MenuService
             DB::beginTransaction();
 
             $oldImg = $category->image;
-            $newImg = isset($data['image']) ?? null;
 
             //Если меняется картинка, то нужно внести её в хранилище и удалить оттуда старую
             if(isset($data['image']))
             {
-                $newImg = Storage::put('/Images/MenuCategory', $data['image']);
+                $newImg = Storage::disk('public')->put('/Images/MenuCategory', $data['image']);
                 $data['image'] = $newImg;
                 $category->update($data);
                 Storage::delete($oldImg);
