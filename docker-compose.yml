@@ -4,6 +4,7 @@ services:
     build:
       context: .
       dockerfile: ./_docker/laravel/Dockerfile
+    restart: always
     volumes:
       - ./:/var/www/restaurant_api
       - ./_docker/laravel/php.ini:/usr/local/etc/php/php.ini
