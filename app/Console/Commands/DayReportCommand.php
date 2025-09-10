@@ -3,9 +3,10 @@
 namespace App\Console\Commands;
 
 use App\Models\DayReport;
+use App\Models\Dish;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
 
 class DayReportCommand extends Command
 {
@@ -39,24 +40,14 @@ class DayReportCommand extends Command
             $data['orders_count'] = $query1;
 
             //Запрос на поиск официанта, закрывшего больше всего заказов за текущий день
-            $query2 = DB::table('orders')
-                ->select(DB::raw('users.name, count(orders.number) as count'))
-                ->join('users', 'users.id', '=', 'orders.user_id')
-                ->where('orders.closing_date', "'{$date}'")
-                ->groupBy('users.name')
-                ->orderBy('count', 'desc')
-                ->first();
+            $query2 = User::query()->withCount(['orders' => function ($q) use ($date) {
+                $q->whereDate('closing_date', $date);
+            }])->orderByDesc('orders_count')->first(['name']);
             isset($query2) ? $data['best_waiter'] = $query2->name : $data['best_waiter'] = '-';
 
-            //Запрос на поиск блюда, которое заказывали чаще всего за текущий день
-            $query3 = DB::table('dish_orders')
-                ->select(DB::raw('dishes.name, sum(dish_orders.quantity) as sum'))
-                ->join('dishes', 'dish_orders.dish_id', '=', 'dishes.id')
-                ->join('orders', 'orders.id', '=', 'dish_orders.order_id')
-                ->where('orders.closing_date', "'{$date}'")
-                ->groupBy('dishes.name')
-                ->orderBy('sum', 'desc')
-                ->first();
+            $q3 = Dish::withSum('orders as total_quantity', 'dish_orders.quantity')->whereHas('orders', function ($q) use ($date) {
+                    $q->whereDate('closing_date', $date);
+                })->orderByDesc('total_quantity')->first(['name']);
             isset($query3) ? $data['best_dish'] = $query3->name : $data['best_dish'] = '-';
 
             DayReport::create($data);
