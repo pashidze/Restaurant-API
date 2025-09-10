@@ -8,6 +8,7 @@ use App\Http\Requests\Order\StoreOrderRequest;
 use App\Http\Requests\Order\UpdateOrderRequest;
 use App\Http\Resources\Order\OrderResource;
 use App\Models\Order;
+use App\Models\User;
 use App\Services\Order\OrderService;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -141,19 +142,6 @@ class OrderController extends Controller
      *     summary="Ввод нового заказа",
      *     tags={"Order"},
      *     security={{ "sanctum":{} }},
-     *     @OA\RequestBody(
-     *          @OA\JsonContent(
-     *              allOf={
-     *                  @OA\Schema(
-     *                      @OA\Property(property="list_of_dishes", type="array", @OA\Items(
-     *                          @OA\Property(property="name", type="integer", example=1),
-     *                          @OA\Property(property="quntatity", type="integer", example=1),
-     *                      )),
-     *                      @OA\Property(property="user_id", type="integer", example=1),
-     *                  ),
-     *              },
-     *          ),
-     *      ),
      *     @OA\Response(
      *         response=200,
      *         description="Ok",
@@ -168,14 +156,6 @@ class OrderController extends Controller
      *              ),
      *          ),
      *     ),
-     *     @OA\Response(
-     *          response=422,
-     *          description="Ошибка валидации",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="Error", type="boolean", example="true"),
-     *              @OA\Property(property="Message", type="string", example="email has been requred"),
-     *          ),
-     *      ),
      *     @OA\Response(
      *            response=500,
      *            description="Ошибка сервера",
@@ -280,7 +260,7 @@ class OrderController extends Controller
      *              allOf={
      *                  @OA\Schema(
      *                      @OA\Property(property="list_of_dishes", type="array", @OA\Items(
-     *                           @OA\Property(property="name", type="integer", example=1),
+     *                           @OA\Property(property="dish_id", type="integer", example=1),
      *                           @OA\Property(property="quntatity", type="integer", example=1),
      *                       )),
      *                  ),

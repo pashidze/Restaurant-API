@@ -42,7 +42,7 @@ class MenuController extends Controller
      *          name="name",
      *          required=false,
      *          @OA\Schema(type="string"),
-     *          example="Завтрак",
+     *          example="Горячие блюда",
      *      ),
      *     @OA\Parameter(
      *          description="Поле для сортировки",
@@ -66,7 +66,7 @@ class MenuController extends Controller
      *         @OA\JsonContent(
      *              @OA\Property(property="data", type="array", @OA\Items(
      *                  @OA\Property(property="id", type="integer", example=1),
-     *                  @OA\Property(property="name", type="string", example="Завтрак"),
+     *                  @OA\Property(property="name", type="string", example="Горячие блюда"),
      *                  @OA\Property(property="image", type="string", example="Images/MenuCategory/S9EXsmeHwGPkewmzcm0f6T9RtLHiYjzjvEj9z1Tx.jpg"),
      *              )),
      *          ),
@@ -112,7 +112,7 @@ class MenuController extends Controller
      *         @OA\MediaType(
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
-     *                 @OA\Property(property="name", type="string", example="Завтрак"),
+     *                 @OA\Property(property="name", type="string", example="Горячие блюда"),
      *                 @OA\Property(property="image", type="string", format="binary"),
      *             ),
      *         ),
@@ -123,7 +123,7 @@ class MenuController extends Controller
      *         @OA\JsonContent(
      *              @OA\Property(property="data", type="object",
      *                  @OA\Property(property="id", type="integer", example=1),
-     *                   @OA\Property(property="name", type="string", example="Завтрак"),
+     *                   @OA\Property(property="name", type="string", example="Горячие блюда"),
      *                   @OA\Property(property="image", type="string", example="Images/MenuCategory/S9EXsmeHwGPkewmzcm0f6T9RtLHiYjzjvEj9z1Tx.jpg"),
      *              ),
      *          ),
@@ -179,7 +179,7 @@ class MenuController extends Controller
      *         @OA\JsonContent(
      *              @OA\Property(property="data", type="object",
      *                  @OA\Property(property="id", type="integer", example=1),
-     *                  @OA\Property(property="name", type="string", example="Завтрак"),
+     *                  @OA\Property(property="name", type="string", example="Горячие блюда"),
      *                  @OA\Property(property="image", type="string", example="Images/MenuCategory/S9EXsmeHwGPkewmzcm0f6T9RtLHiYjzjvEj9z1Tx.jpg"),
      *              ),
      *          ),
@@ -223,7 +223,7 @@ class MenuController extends Controller
      *          @OA\MediaType(
      *              mediaType="multipart/form-data",
      *              @OA\Schema(
-     *                  @OA\Property(property="name", type="string", example="Завтрак"),
+     *                  @OA\Property(property="name", type="string", example="Горячие блюда"),
      *                  @OA\Property(property="image", type="string", format="binary"),
      *              ),
      *          ),
@@ -234,7 +234,7 @@ class MenuController extends Controller
      *         @OA\JsonContent(
      *               @OA\Property(property="data", type="object",
      *                   @OA\Property(property="id", type="integer", example=1),
-     *                   @OA\Property(property="name", type="string", example="Завтрак"),
+     *                   @OA\Property(property="name", type="string", example="Горячие блюда"),
      *                   @OA\Property(property="image", type="string", example="Images/MenuCategory/S9EXsmeHwGPkewmzcm0f6T9RtLHiYjzjvEj9z1Tx.jpg"),
      *               ),
      *           ),

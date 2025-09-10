@@ -1328,7 +1328,7 @@
                         "schema": {
                             "type": "string"
                         },
-                        "example": "Завтрак"
+                        "example": "Горячие блюда"
                     },
                     {
                         "name": "sort_by",
@@ -1368,7 +1368,7 @@
                                                     },
                                                     "name": {
                                                         "type": "string",
-                                                        "example": "Завтрак"
+                                                        "example": "Горячие блюда"
                                                     },
                                                     "image": {
                                                         "type": "string",
@@ -1444,7 +1444,7 @@
                                 "properties": {
                                     "name": {
                                         "type": "string",
-                                        "example": "Завтрак"
+                                        "example": "Горячие блюда"
                                     },
                                     "image": {
                                         "type": "string",
@@ -1471,7 +1471,7 @@
                                                 },
                                                 "name": {
                                                     "type": "string",
-                                                    "example": "Завтрак"
+                                                    "example": "Горячие блюда"
                                                 },
                                                 "image": {
                                                     "type": "string",
@@ -1568,7 +1568,7 @@
                                                 },
                                                 "name": {
                                                     "type": "string",
-                                                    "example": "Завтрак"
+                                                    "example": "Горячие блюда"
                                                 },
                                                 "image": {
                                                     "type": "string",
@@ -1701,7 +1701,7 @@
                                 "properties": {
                                     "name": {
                                         "type": "string",
-                                        "example": "Завтрак"
+                                        "example": "Горячие блюда"
                                     },
                                     "image": {
                                         "type": "string",
@@ -1728,7 +1728,7 @@
                                                 },
                                                 "name": {
                                                     "type": "string",
-                                                    "example": "Завтрак"
+                                                    "example": "Горячие блюда"
                                                 },
                                                 "image": {
                                                     "type": "string",
@@ -2046,7 +2046,7 @@
                                                 "type": "array",
                                                 "items": {
                                                     "properties": {
-                                                        "name": {
+                                                        "dish_id": {
                                                             "type": "integer",
                                                             "example": 1
                                                         },
@@ -2392,7 +2392,7 @@
                                                 "type": "array",
                                                 "items": {
                                                     "properties": {
-                                                        "name": {
+                                                        "dish_id": {
                                                             "type": "integer",
                                                             "example": 1
                                                         },
